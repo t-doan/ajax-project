@@ -1,0 +1,40 @@
+* {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.header-color {
+  background-color: #fff;
+}
+
+#arknights-logo {
+  width: 12em;
+  padding: 1em 0;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.logo {
+  padding: 0 8em 0 0;
+}
+
+.header-button {
+  width: 18em;
+  height: 3em;
+  font-size: 9px;
+  color: #fff;
+  background-color: #000;
+  border-radius: 15px;
+  text-align: center;
+  margin: 0 2em;
+}
+
+.tabs {
+  margin: auto;
+  font-weight: 400;
+}
