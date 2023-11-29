@@ -15,20 +15,65 @@
       rel="stylesheet" />
   </head>
   <body>
-    <header class="row header-color">
-      <div class="container display-flex align-items-center">
-        <div class="logo">
+    <header class="header-color">
+      <div
+        class="container display-flex flex-wrap align-items-center justify-content-center overflow-x-hidden">
+        <div class="column-half logo">
           <img id="arknights-logo" src="./images/logo.png" alt="logo" />
         </div>
-        <div class="header-button">
+        <div class="column-fourth header-button">
           <h1 class="tabs">Operators</h1>
         </div>
-        <div class="header-button">
+        <div class="column-fourth header-button">
           <h1 class="tabs">Squads</h1>
         </div>
       </div>
     </header>
-    <main class="container"></main>
+    <main class="container">
+      <div>
+        <h1>All Operators</h1>
+      </div>
+      <div class="row align-items-center justify-content-even">
+        <div class="class-box coloumn-fourth">
+          <img class="classes" src="./images/Caster.webp" alt="caster" />
+          <p class="class-text">Caster</p>
+        </div>
+        <div class="class-box coloumn-fourth">
+          <img class="classes" src="./images/Defender.webp" alt="defender" />
+          <p class="class-text">Defender</p>
+        </div>
+        <div class="class-box coloumn-fourth">
+          <img class="classes" src="./images/Guard.webp" alt="guard" />
+          <p class="class-text">Guard</p>
+        </div>
+        <div class="class-box coloumn-fourth">
+          <img class="classes" src="./images/Medic.webp" alt="medic" />
+          <p class="class-text">Medic</p>
+        </div>
+        <div class="class-box coloumn-fourth">
+          <img class="classes" src="./images/Sniper.webp" alt="sniper" />
+          <p class="class-text">Sniper</p>
+        </div>
+        <div class="class-box coloumn-fourth">
+          <img
+            class="classes"
+            src="./images/Specialist.webp"
+            alt="specialist" />
+          <p class="class-text">Specialist</p>
+        </div>
+        <div class="class-box coloumn-fourth">
+          <img class="classes" src="./images/Supporter.webp" alt="supporter" />
+          <p class="class-text">Supporter</p>
+        </div>
+        <div class="class-box coloumn-fourth">
+          <img class="classes" src="./images/Vanguard.webp" alt="vanguard" />
+          <p class="class-text">Vanguard</p>
+        </div>
+      </div>
+      <div class="column-half ul-list">
+        <ul class="operators-list"></ul>
+      </div>
+    </main>
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
   </body>

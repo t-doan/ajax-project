@@ -6,6 +6,10 @@
   background-color: #fff;
 }
 
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
 #arknights-logo {
   width: 12em;
   padding: 1em 0;
@@ -20,7 +24,7 @@
 }
 
 .logo {
-  padding: 0 8em 0 0;
+  padding: 0 2.5rem;
 }
 
 .header-button {
@@ -37,4 +41,59 @@
 .tabs {
   margin: auto;
   font-weight: 400;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+div {
+  border: 1px solid red;
+}
+
+.operators-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  float: left;
+  display: block;
+  padding: 1rem;
+}
+
+.ops {
+  width: 5rem;
+}
+
+.classes {
+  width: 40px;
+  height: 40px;
+}
+
+.flex-basis-4 {
+  flex-basis: 25%;
+}
+
+.justify-content-even {
+  justify-content: space-evenly;
+}
+
+.class-box {
+  background-color: #d9d9d9;
+  width: 110px;
+  height: 63px;
+  text-align: center;
+}
+
+.class-text {
+  color: black;
+  font-size: 12px;
+  margin: auto;
+  font-weight: 550;
 }

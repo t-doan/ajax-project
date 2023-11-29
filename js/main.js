@@ -1,20 +1,27 @@
-// const xhr = new XMLHttpRequest();
-// xhr.open('GET', 'https://api.rhodesapi.com/api/operator');
-// xhr.responseType = 'json';
-// xhr.addEventListener('load', function () {
-//   console.log(xhr.status);
-//   console.log(xhr.response);
-//   for (const user of xhr.response) {
-//     console.log('operator:', user);
-//     const newImg = document.createElement('img');
-//     if (user.art.length >= 2){
-//           const art = user.art[2].link;
-//           console.log('art:', art);
-//           newImg.setAttribute('src', art);
-//           main.appendChild(newImg);
-//     }
-//   }
-// });
-// xhr.send();
+const xhr = new XMLHttpRequest();
+const arrayOps = [];
+xhr.open(
+  'GET',
+  'https://api.rhodesapi.com/api/operator?exclude=talents,rarity,artist,va,description,quote,voicelines,alter,affiliation,tags,range,statistics,trait,potential,trust,skills,costs,module,base,headhunting,recruitable,availability,release_dates',
+);
+xhr.responseType = 'json';
+xhr.addEventListener('load', function () {
+  console.log(xhr.status);
+  console.log(xhr.response);
+  for (const ops of xhr.response) {
+    /* get all characters */
+    if (ops.art.length >= 0) {
+      art = ops.art[1].link;
+      const newImg = document.createElement('img');
+      const newLi = document.createElement('li');
+      newImg.classList.add('ops');
+      newImg.setAttribute('src', art);
+      newImg.setAttribute('alt', ops.name);
+      $ul.appendChild(newLi);
+      newLi.appendChild(newImg);
+    }
+  }
+});
+xhr.send();
 
-// const main = document.querySelector('main');
+const $ul = document.querySelector('ul');
