@@ -43,32 +43,45 @@
   font-weight: 400;
 }
 
+.tabs:hover {
+  color: yellow;
+  cursor: pointer;
+}
+
 .justify-content-center {
   justify-content: center;
+}
+
+.flex-direction-column {
+  flex-direction: column;
 }
 
 .overflow-x-hidden {
   overflow-x: hidden;
 }
 
-div {
-  border: 1px solid red;
-}
-
 .operators-list {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  overflow-y: scroll;
+  height: 38rem;
 }
 
 li {
   float: left;
   display: block;
-  padding: 1rem;
+  padding: 0.1rem;
 }
 
 .ops {
   width: 5rem;
+  background-color: #d9d9d9;
+}
+
+.ops:hover {
+  background-color: #0baef4;
+  cursor: pointer;
 }
 
 .classes {
@@ -96,4 +109,65 @@ li {
   font-size: 12px;
   margin: auto;
   font-weight: 550;
+}
+
+.class-box:hover {
+  background-color: white;
+  cursor: pointer;
+}
+
+.operator-modal {
+  background-color: #1f1f1f;
+  width: 100%;
+  position: relative;
+}
+
+#classes-box {
+  padding: 1rem 0;
+}
+
+padding-zero {
+  padding: 0;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+#op-name {
+  color: #fff;
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
+#operator-img {
+  width: 20rem;
+}
+
+.class-icons {
+  width: 3rem;
+}
+
+.lore {
+  font-size: 12px;
+  text-align: center;
+}
+
+.op-bio {
+  line-height: 10px;
+  padding: 0.1rem;
+}
+
+#biography {
+  padding: 0 2rem 2rem;
+}
+
+.class-tag {
+  font-size: 12px;
+  text-align: center;
+}
+
+.operator-class {
+  padding: 0.5rem;
 }
