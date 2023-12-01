@@ -18,21 +18,25 @@ xhr.addEventListener('load', function () {
   for (const ops of xhr.response) {
     if (ops.name !== 'Kirin X Yato') {
       if (ops.art.length > 1) {
-        art = ops.art[1].link;
-        const newImg = document.createElement('img');
-        const newLi = document.createElement('li');
-        newLi.setAttribute('data-id', ops.name);
-        newLi.setAttribute('data-class', ops.class[0]);
-        newImg.classList.add('ops');
-        newImg.setAttribute('src', art);
-        newImg.setAttribute('alt', ops.name);
-        $ul.appendChild(newLi);
-        newLi.appendChild(newImg);
+        createList(ops);
       }
     }
   }
 });
 xhr.send();
+
+function createList(ops) {
+  art = ops.art[1].link;
+  const newImg = document.createElement('img');
+  const newLi = document.createElement('li');
+  newLi.setAttribute('data-id', ops.name);
+  newLi.setAttribute('data-class', ops.class[0]);
+  newImg.classList.add('ops');
+  newImg.setAttribute('src', art);
+  newImg.setAttribute('alt', ops.name);
+  $ul.appendChild(newLi);
+  newLi.appendChild(newImg);
+}
 
 function handleOperator(event) {
   const target = event.target.getAttribute('alt');
