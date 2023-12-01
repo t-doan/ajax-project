@@ -139,10 +139,11 @@ padding-zero {
   color: #fff;
   font-weight: 400;
   font-size: 1.5rem;
+  margin: 10px 0 0;
 }
 
 #operator-img {
-  width: 20rem;
+  width: 18rem;
 }
 
 .class-icons {
@@ -154,7 +155,7 @@ padding-zero {
   text-align: center;
 }
 
-.op-bio {
+.op-lore {
   line-height: 10px;
   padding: 0.1rem;
 }
@@ -165,9 +166,27 @@ padding-zero {
 
 .class-tag {
   font-size: 12px;
-  text-align: center;
 }
 
 .operator-class {
   padding: 0.5rem;
+  text-align: center;
+}
+
+.align-items-baseline {
+  align-items: baseline;
+}
+
+.click {
+  background-color: #ffc;
+}
+
+.click:hover {
+  background-color: #ff6;
+}
+
+@media screen and (min-width: 768px) {
+  #operator-img {
+    width: 30rem;
+  }
 }
