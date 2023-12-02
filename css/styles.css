@@ -1,0 +1,192 @@
+* {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+.header-color {
+  background-color: #fff;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+#arknights-logo {
+  width: 12em;
+  padding: 1em 0;
+}
+
+.display-flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.logo {
+  padding: 0 2.5rem;
+}
+
+.header-button {
+  width: 18em;
+  height: 3em;
+  font-size: 9px;
+  color: #fff;
+  background-color: #000;
+  border-radius: 15px;
+  text-align: center;
+  margin: 0 2em;
+}
+
+.tabs {
+  margin: auto;
+  font-weight: 400;
+}
+
+.tabs:hover {
+  color: yellow;
+  cursor: pointer;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.flex-direction-column {
+  flex-direction: column;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+.operators-list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: scroll;
+  height: 38rem;
+}
+
+li {
+  float: left;
+  display: block;
+  padding: 0.1rem;
+}
+
+.ops {
+  width: 5rem;
+  background-color: #d9d9d9;
+}
+
+.ops:hover {
+  background-color: #0baef4;
+  cursor: pointer;
+}
+
+.classes {
+  width: 40px;
+  height: 40px;
+}
+
+.flex-basis-4 {
+  flex-basis: 25%;
+}
+
+.justify-content-even {
+  justify-content: space-evenly;
+}
+
+.class-box {
+  background-color: #d9d9d9;
+  width: 110px;
+  height: 63px;
+  text-align: center;
+}
+
+.class-text {
+  color: black;
+  font-size: 12px;
+  margin: auto;
+  font-weight: 550;
+}
+
+.class-box:hover {
+  background-color: white;
+  cursor: pointer;
+}
+
+.operator-modal {
+  background-color: #1f1f1f;
+  width: 100%;
+  position: relative;
+}
+
+#classes-box {
+  padding: 1rem 0;
+}
+
+padding-zero {
+  padding: 0;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+
+#op-name {
+  color: #fff;
+  font-weight: 400;
+  font-size: 1.5rem;
+  margin: 10px 0 0;
+}
+
+#operator-img {
+  width: 18rem;
+}
+
+.class-icons {
+  width: 3rem;
+}
+
+.lore {
+  font-size: 12px;
+  text-align: center;
+}
+
+.op-lore {
+  line-height: 10px;
+  padding: 0.1rem;
+}
+
+#biography {
+  padding: 0 2rem 2rem;
+}
+
+.class-tag {
+  font-size: 12px;
+}
+
+.operator-class {
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.align-items-baseline {
+  align-items: baseline;
+}
+
+.click {
+  background-color: #ffc;
+}
+
+.click:hover {
+  background-color: #ff6;
+}
+
+@media screen and (min-width: 768px) {
+  #operator-img {
+    width: 30rem;
+  }
+}
