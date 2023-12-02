@@ -2,6 +2,7 @@ const $ul = document.querySelector('ul');
 const $modal = document.querySelector('#modal-section');
 const $class = document.querySelector('#classes-box');
 const $classBox = document.querySelectorAll('.class-box');
+const $operatorsTab = document.querySelectorAll('.tabs');
 
 $ul.addEventListener('click', handleOperator);
 $class.addEventListener('click', handleFilter);
@@ -13,29 +14,32 @@ xhr.open(
 );
 xhr.responseType = 'json';
 xhr.addEventListener('load', function () {
-  console.log(xhr.status);
-  console.log(xhr.response);
   for (const ops of xhr.response) {
     if (ops.name !== 'Kirin X Yato') {
       if (ops.art.length > 1) {
-        createList(ops);
+        handleList(ops);
       }
     }
   }
 });
 xhr.send();
 
-function createList(ops) {
-  art = ops.art[1].link;
-  const newImg = document.createElement('img');
-  const newLi = document.createElement('li');
-  newLi.setAttribute('data-id', ops.name);
-  newLi.setAttribute('data-class', ops.class[0]);
-  newImg.classList.add('ops');
-  newImg.setAttribute('src', art);
-  newImg.setAttribute('alt', ops.name);
-  $ul.appendChild(newLi);
-  newLi.appendChild(newImg);
+function handleList(ops) {
+  $ul.appendChild(renderList(ops));
+}
+
+function renderList(ops) {
+  const artLink = ops.art[1].link;
+  const $newImg = document.createElement('img');
+  const $newLi = document.createElement('li');
+  $newLi.setAttribute('data-id', ops.name);
+  $newLi.setAttribute('data-class', ops.class[0]);
+  $newImg.classList.add('ops');
+  $newImg.setAttribute('src', artLink);
+  $newImg.setAttribute('alt', ops.name);
+  $newLi.appendChild($newImg);
+
+  return $newLi;
 }
 
 function handleOperator(event) {
