@@ -14,6 +14,7 @@
       href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@1,300&family=Merriweather:ital,wght@1,900&family=Noto+Sans&display=swap"
       rel="stylesheet" />
   </head>
+
   <body>
     <header class="header-color">
       <div
@@ -22,72 +23,83 @@
           <img id="arknights-logo" src="./images/logo.png" alt="logo" />
         </div>
         <div class="column-fourth header-button">
-          <h1 class="tabs">Operators</h1>
+          <h1 class="tabs" id="operators-tab">Operators</h1>
         </div>
         <div class="column-fourth header-button">
-          <h1 class="tabs">Squads</h1>
+          <h1 class="tabs" id="squads-tab">Squads</h1>
         </div>
       </div>
     </header>
     <main class="container">
-      <div>
-        <h1>All Operators</h1>
+      <div class="opsPage">
+        <div>
+          <h1>All Operators</h1>
+        </div>
+        <div class="classes-box row align-items-center justify-content-even">
+          <div class="class-box coloumn-fourth caster">
+            <img
+              class="classes"
+              src="./images//Caster/Caster.webp"
+              alt="caster" />
+            <p class="class-text">Caster</p>
+          </div>
+          <div class="class-box coloumn-fourth defender">
+            <img
+              class="classes"
+              src="./images/Defender/Defender.webp"
+              alt="defender" />
+            <p class="class-text">Defender</p>
+          </div>
+          <div class="class-box coloumn-fourth guard">
+            <img class="classes" src="./images/Guard/Guard.webp" alt="guard" />
+            <p class="class-text">Guard</p>
+          </div>
+          <div class="class-box coloumn-fourth medic">
+            <img class="classes" src="./images/Medic/Medic.webp" alt="medic" />
+            <p class="class-text">Medic</p>
+          </div>
+          <div class="class-box coloumn-fourth sniper">
+            <img
+              class="classes"
+              src="./images/Sniper/Sniper.webp"
+              alt="sniper" />
+            <p class="class-text">Sniper</p>
+          </div>
+          <div class="class-box coloumn-fourth specialist">
+            <img
+              class="classes"
+              src="./images/Specialist/Specialist.webp"
+              alt="specialist" />
+            <p class="class-text">Specialist</p>
+          </div>
+          <div class="class-box coloumn-fourth supporter">
+            <img
+              class="classes"
+              src="./images/Supporter/Supporter.webp"
+              alt="supporter" />
+            <p class="class-text">Supporter</p>
+          </div>
+          <div class="class-box coloumn-fourth vanguard">
+            <img
+              class="classes"
+              src="./images/Vanguard/Vanguard.webp"
+              alt="vanguard" />
+            <p class="class-text">Vanguard</p>
+          </div>
+        </div>
+
+        <div class="row display-flex">
+          <div class="column-half ul-list">
+            <ul
+              class="operators-list display-flex flex-wrap justify-content-even"></ul>
+          </div>
+          <div id="modal-section" class="column-half padding-zero"></div>
+        </div>
       </div>
-      <div id="classes-box" class="row align-items-center justify-content-even">
-        <div class="class-box coloumn-fourth" id="caster">
-          <img
-            class="classes"
-            src="./images//Caster/Caster.webp"
-            alt="caster" />
-          <p class="class-text">Caster</p>
-        </div>
-        <div class="class-box coloumn-fourth" id="defender">
-          <img
-            class="classes"
-            src="./images/Defender/Defender.webp"
-            alt="defender" />
-          <p class="class-text">Defender</p>
-        </div>
-        <div class="class-box coloumn-fourth" id="guard">
-          <img class="classes" src="./images/Guard/Guard.webp" alt="guard" />
-          <p class="class-text">Guard</p>
-        </div>
-        <div class="class-box coloumn-fourth" id="medic">
-          <img class="classes" src="./images/Medic/Medic.webp" alt="medic" />
-          <p class="class-text">Medic</p>
-        </div>
-        <div class="class-box coloumn-fourth" id="sniper">
-          <img class="classes" src="./images/Sniper/Sniper.webp" alt="sniper" />
-          <p class="class-text">Sniper</p>
-        </div>
-        <div class="class-box coloumn-fourth" id="specialist">
-          <img
-            class="classes"
-            src="./images/Specialist/Specialist.webp"
-            alt="specialist" />
-          <p class="class-text">Specialist</p>
-        </div>
-        <div class="class-box coloumn-fourth" id="supporter">
-          <img
-            class="classes"
-            src="./images/Supporter/Supporter.webp"
-            alt="supporter" />
-          <p class="class-text">Supporter</p>
-        </div>
-        <div class="class-box coloumn-fourth" id="vanguard">
-          <img
-            class="classes"
-            src="./images/Vanguard/Vanguard.webp"
-            alt="vanguard" />
-          <p class="class-text">Vanguard</p>
-        </div>
-      </div>
-      <div class="row display-flex">
-        <div class="column-half ul-list">
-          <ul
-            class="operators-list display-flex flex-wrap justify-content-even"></ul>
-        </div>
-        <div id="modal-section" class="column-half padding-zero"></div>
+      <div class="squadPage hidden">
+        <h1 class="noEntry">No squads have been made!</h1>
+        <ul
+          class="squads-list display-flex flex-wrap justify-content-even"></ul>
       </div>
     </main>
     <script src="js/data.js"></script>

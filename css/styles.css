@@ -44,7 +44,14 @@
 }
 
 .tabs:hover {
-  color: yellow;
+  background-color: #ff6;
+  color: #000;
+  cursor: pointer;
+}
+
+.currentTab {
+  background-color: #ffc;
+  color: #000;
   cursor: pointer;
 }
 
@@ -122,7 +129,7 @@ li {
   position: relative;
 }
 
-#classes-box {
+.classes-box {
   padding: 1rem 0;
 }
 

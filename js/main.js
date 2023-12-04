@@ -1,11 +1,22 @@
-const $ul = document.querySelector('ul');
+const $ulOperatorList = document.querySelector('.operators-list');
 const $modal = document.querySelector('#modal-section');
-const $class = document.querySelector('#classes-box');
+const $class = document.querySelector('.classes-box');
 const $classBox = document.querySelectorAll('.class-box');
-const $operatorsTab = document.querySelectorAll('.tabs');
+const $operatorsTab = document.querySelector('#operators-tab');
+const $squadsTab = document.querySelector('#squads-tab');
+const $opsPage = document.querySelector('.opsPage');
+const $squadPage = document.querySelector('.squadPage');
+const $ulSquadList = document.querySelector('squads-list');
+const $noEntry = document.querySelector('.noEntry');
 
-$ul.addEventListener('click', handleOperator);
+$ulOperatorList.addEventListener('click', handleOperator);
 $class.addEventListener('click', handleFilter);
+$operatorsTab.addEventListener('click', function () {
+  $operatorsTab.viewSwap('operators');
+});
+$squadsTab.addEventListener('click', function () {
+  viewSwap('squads');
+});
 
 const xhr = new XMLHttpRequest();
 xhr.open(
@@ -25,7 +36,7 @@ xhr.addEventListener('load', function () {
 xhr.send();
 
 function handleList(ops) {
-  $ul.appendChild(renderList(ops));
+  $ulOperatorList.appendChild(renderList(ops));
 }
 
 function renderList(ops) {
@@ -193,56 +204,56 @@ function setClassImg(operator) {
 
 function handleFilter(event) {
   if (
-    event.target.getAttribute('id') === 'caster' ||
+    event.target.classList.contains('caster') ||
     event.target.getAttribute('alt') === 'caster' ||
     event.target.innerText === 'Caster'
   ) {
     filterOps('Caster');
     selected('caster');
   } else if (
-    event.target.getAttribute('id') === 'defender' ||
+    event.target.classList.contains('defender') ||
     event.target.getAttribute('alt') === 'defender' ||
     event.target.innerText === 'Defender'
   ) {
     filterOps('Defender');
     selected('defender');
   } else if (
-    event.target.getAttribute('id') === 'guard' ||
+    event.target.classList.contains('guard') ||
     event.target.getAttribute('alt') === 'guard' ||
     event.target.innerText === 'Guard'
   ) {
     filterOps('Guard');
     selected('guard');
   } else if (
-    event.target.getAttribute('id') === 'medic' ||
+    event.target.classList.contains('medic') ||
     event.target.getAttribute('alt') === 'medic' ||
     event.target.innerText === 'Medic'
   ) {
     filterOps('Medic');
     selected('medic');
   } else if (
-    event.target.getAttribute('id') === 'sniper' ||
+    event.target.classList.contains('sniper') ||
     event.target.getAttribute('alt') === 'sniper' ||
     event.target.innerText === 'Sniper'
   ) {
     filterOps('Sniper');
     selected('sniper');
   } else if (
-    event.target.getAttribute('id') === 'specialist' ||
+    event.target.classList.contains('specialist') ||
     event.target.getAttribute('alt') === 'specialist' ||
     event.target.innerText === 'Specialist'
   ) {
     filterOps('Specialist');
     selected('specialist');
   } else if (
-    event.target.getAttribute('id') === 'supporter' ||
+    event.target.classList.contains('supporter') ||
     event.target.getAttribute('alt') === 'supporter' ||
     event.target.innerText === 'Supporter'
   ) {
     filterOps('Supporter');
     selected('supporter');
   } else if (
-    event.target.getAttribute('id') === 'vanguard' ||
+    event.target.classList.contains('vanguard') ||
     event.target.getAttribute('alt') === 'vanguard' ||
     event.target.innerText === 'Vanguard'
   ) {
@@ -263,8 +274,9 @@ function filterOps(classTag) {
 }
 
 function selected(classTag) {
+  console.log('event:', event.target);
   for (let i = 0; i < $classBox.length; i++) {
-    if ($classBox[i].id === classTag) {
+    if ($classBox[i].classList.contains(classTag)) {
       if ($classBox[i].classList.contains('click')) {
         $classBox[i].classList.remove('click');
         unFilterOps();
@@ -282,4 +294,18 @@ function unFilterOps() {
   for (let i = 0; i < $li.length; i++) {
     $li[i].classList.remove('hidden');
   }
+}
+
+function viewSwap(view) {
+  if (view === 'operators') {
+    $opsPage.classList.remove('hidden');
+    $squadPage.classList.add('hidden');
+  } else if (view === 'squads') {
+    $squadPage.classList.remove('hidden');
+    $opsPage.classList.add('hidden');
+  }
+}
+
+function checkEntry() {
+  $noEntry.classList.remove('hidden');
 }
