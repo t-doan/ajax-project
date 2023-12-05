@@ -6,15 +6,26 @@ const $operatorsTab = document.querySelector('#operators-tab');
 const $squadsTab = document.querySelector('#squads-tab');
 const $opsPage = document.querySelector('.opsPage');
 const $squadPage = document.querySelector('.squadPage');
-const $ulSquadList = document.querySelector('squads-list');
+
+const $ulSquadList = document.querySelector('.squads-list');
 const $noEntry = document.querySelector('.noEntry');
 
+const $teamSlot = document.querySelector('.team-slot');
+const $squadClass = document.querySelector('#squad-class');
+
+$ulSquadList.addEventListener('click', handleSelection);
+$teamSlot.addEventListener('click', openOps);
 $ulOperatorList.addEventListener('click', handleOperator);
+$squadClass.addEventListener('click', handleFilter);
 $class.addEventListener('click', handleFilter);
 $operatorsTab.addEventListener('click', function () {
-  $operatorsTab.viewSwap('operators');
+  $operatorsTab.classList.add('currentTab');
+  $squadsTab.classList.remove('currentTab');
+  viewSwap('operators');
 });
 $squadsTab.addEventListener('click', function () {
+  $operatorsTab.classList.remove('currentTab');
+  $squadsTab.classList.add('currentTab');
   viewSwap('squads');
 });
 
@@ -37,6 +48,7 @@ xhr.send();
 
 function handleList(ops) {
   $ulOperatorList.appendChild(renderList(ops));
+  $ulSquadList.appendChild(renderList(ops));
 }
 
 function renderList(ops) {
@@ -45,6 +57,7 @@ function renderList(ops) {
   const $newLi = document.createElement('li');
   $newLi.setAttribute('data-id', ops.name);
   $newLi.setAttribute('data-class', ops.class[0]);
+  $newLi.classList.add('operators');
   $newImg.classList.add('ops');
   $newImg.setAttribute('src', artLink);
   $newImg.setAttribute('alt', ops.name);
@@ -263,7 +276,7 @@ function handleFilter(event) {
 }
 
 function filterOps(classTag) {
-  const $li = document.querySelectorAll('li');
+  const $li = document.querySelectorAll('.operators');
   for (let i = 0; i < $li.length; i++) {
     if ($li[i].getAttribute('data-class') !== classTag) {
       $li[i].classList.add('hidden');
@@ -274,7 +287,6 @@ function filterOps(classTag) {
 }
 
 function selected(classTag) {
-  console.log('event:', event.target);
   for (let i = 0; i < $classBox.length; i++) {
     if ($classBox[i].classList.contains(classTag)) {
       if ($classBox[i].classList.contains('click')) {
@@ -306,6 +318,18 @@ function viewSwap(view) {
   }
 }
 
+function openOps() {
+  if (event.target.matches('li') || event.target.matches('i')) {
+    $squadClass.classList.remove('hidden');
+    $ulSquadList.classList.remove('hidden');
+  }
+}
+
 function checkEntry() {
   $noEntry.classList.remove('hidden');
+}
+
+function handleSelection() {
+  const arrayTeam = [];
+  console.log('ops', event.target);
 }
