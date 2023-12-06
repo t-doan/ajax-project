@@ -12,6 +12,8 @@ const $noEntry = document.querySelector('.noEntry');
 
 const $teamSlot = document.querySelector('.team-slot');
 const $squadClass = document.querySelector('#squad-class');
+const $liSlot = document.querySelectorAll('.op-slot');
+const $plusIcon = document.querySelectorAll('.fa-plus');
 
 $ulSquadList.addEventListener('click', handleSelection);
 $teamSlot.addEventListener('click', openOps);
@@ -30,6 +32,8 @@ $squadsTab.addEventListener('click', function () {
 });
 
 const xhr = new XMLHttpRequest();
+const operatorArray = [];
+const squadArray = [];
 xhr.open(
   'GET',
   'https://lfz-cors.herokuapp.com/?url=https://api.rhodesapi.com/api/operator?exclude=talents,rarity,artist,va,description,quote,voicelines,alter,affiliation,tags,range,statistics,trait,potential,trust,skills,costs,module,base,headhunting,recruitable,availability,release_dates',
@@ -40,6 +44,7 @@ xhr.addEventListener('load', function () {
     if (ops.name !== 'Kirin X Yato') {
       if (ops.art.length > 1) {
         handleList(ops);
+        operatorArray.push(ops);
       }
     }
   }
@@ -64,6 +69,23 @@ function renderList(ops) {
   $newLi.appendChild($newImg);
 
   return $newLi;
+}
+
+function renderOne(ops) {
+  const $slotImg = document.createElement('img');
+  for (const operator of operatorArray) {
+    if (ops === operator.name) {
+      $slotImg.setAttribute('src', operator.art[1].link);
+      $slotImg.setAttribute('alt', operator.name);
+      $slotImg.classList.add('slotOp');
+    }
+  }
+  // const $newImg = document.createElement('img');
+  // $newImg.classList.add('ops');
+  // // $newImg.setAttribute('src', );
+  // $newImg.setAttribute('alt', ops.name);
+
+  return $slotImg;
 }
 
 function handleOperator(event) {
@@ -330,6 +352,25 @@ function checkEntry() {
 }
 
 function handleSelection() {
-  const arrayTeam = [];
-  console.log('ops', event.target);
+  if (event.target.getAttribute('alt') !== null) {
+    const selectOps = event.target.getAttribute('alt');
+    if (squadArray.length < 12) {
+      if (!squadArray.includes(selectOps)) {
+        event.target.classList.add('selected');
+        squadArray.push(selectOps);
+      }
+
+      console.log('cl', squadArray.length);
+    }
+
+    if (squadArray.length === 12) {
+      replaceSlot(squadArray);
+    }
+  }
+}
+
+function replaceSlot(array) {
+  for (let i = 0; i < $plusIcon.length; i++) {
+    $plusIcon[i].replaceWith(renderOne(array[i]));
+  }
 }
