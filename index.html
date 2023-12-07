@@ -4,9 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>AJAX Project</title>
-    <script
-      src="https://kit.fontawesome.com/109c8fd17f.js"
-      crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
     <link rel="icon" href="images/favicon.ico" />
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/layout.css" />
@@ -99,78 +102,83 @@
           <div id="modal-section" class="column-half padding-zero"></div>
         </div>
       </div>
-      <div class="squadPage">
-        <h1 class="noEntry">No squads have been made!</h1>
-        <div class="row entry-form column-half">
-          <div class="squad" data-entry-id="1">
-            <input
-              class="name-text"
-              name="teamName"
-              placeholder="Squad Name"
-              required />
-            <ul
-              class="team-slot display-flex align-items-center flex-wrap justify-content-even">
-              <li
-                class="op-slot display-flex justify-content-center align-items-center"
-                data-slot-id="1">
-                <i class="fa-regular fa-plus"></i>
-              </li>
-              <li
-                class="op-slot display-flex justify-content-center align-items-center"
-                data-slot-id="2">
-                <i class="fa-regular fa-plus"></i>
-              </li>
-              <li
-                class="op-slot display-flex justify-content-center align-items-center"
-                data-slot-id="3">
-                <i class="fa-regular fa-plus"></i>
-              </li>
-              <li
-                class="op-slot display-flex justify-content-center align-items-center">
-                <i class="fa-regular fa-plus"></i>
-              </li>
-              <li
-                class="op-slot display-flex justify-content-center align-items-center">
-                <i class="fa-regular fa-plus"></i>
-              </li>
-              <li
-                class="op-slot display-flex justify-content-center align-items-center">
-                <i class="fa-regular fa-plus"></i>
-              </li>
-              <li
-                class="op-slot display-flex justify-content-center align-items-center">
-                <i class="fa-regular fa-plus"></i>
-              </li>
-              <li
-                class="op-slot display-flex justify-content-center align-items-center">
-                <i class="fa-regular fa-plus"></i>
-              </li>
-              <li
-                class="op-slot display-flex justify-content-center align-items-center">
-                <i class="fa-regular fa-plus"></i>
-              </li>
-              <li
-                class="op-slot display-flex justify-content-center align-items-center">
-                <i class="fa-regular fa-plus"></i>
-              </li>
-              <li
-                class="op-slot display-flex justify-content-center align-items-center">
-                <i class="fa-regular fa-plus"></i>
-              </li>
-              <li
-                class="op-slot display-flex justify-content-center align-items-center">
-                <i class="fa-regular fa-plus"></i>
-              </li>
-            </ul>
+      <div class="squadPage display-flex flex-wrap">
+        <h1 class="noEntry column-half hidden">No squads have been made!</h1>
+        <h1 class="nameHeader column-half">Add your operators</h1>
+        <ul class="entryList"></ul>
+        <form id="form">
+          <div class="row entry-form column-half">
+            <div class="squad" data-entry-id="1">
+              <h1 class="squadName">Squad Name</h1>
+              <input
+                class="name-text"
+                name="teamName"
+                placeholder="Squad Name"
+                required />
+              <ul
+                class="team-slot display-flex align-items-center flex-wrap justify-content-even">
+                <li
+                  class="op-slot display-flex justify-content-center align-items-center">
+                  <i class="fa-regular fa-plus"></i>
+                </li>
+                <li
+                  class="op-slot display-flex justify-content-center align-items-center">
+                  <i class="fa-regular fa-plus"></i>
+                </li>
+                <li
+                  class="op-slot display-flex justify-content-center align-items-center">
+                  <i class="fa-regular fa-plus"></i>
+                </li>
+                <li
+                  class="op-slot display-flex justify-content-center align-items-center">
+                  <i class="fa-regular fa-plus"></i>
+                </li>
+                <li
+                  class="op-slot display-flex justify-content-center align-items-center">
+                  <i class="fa-regular fa-plus"></i>
+                </li>
+                <li
+                  class="op-slot display-flex justify-content-center align-items-center">
+                  <i class="fa-regular fa-plus"></i>
+                </li>
+                <li
+                  class="op-slot display-flex justify-content-center align-items-center">
+                  <i class="fa-regular fa-plus"></i>
+                </li>
+                <li
+                  class="op-slot display-flex justify-content-center align-items-center">
+                  <i class="fa-regular fa-plus"></i>
+                </li>
+                <li
+                  class="op-slot display-flex justify-content-center align-items-center">
+                  <i class="fa-regular fa-plus"></i>
+                </li>
+                <li
+                  class="op-slot display-flex justify-content-center align-items-center">
+                  <i class="fa-regular fa-plus"></i>
+                </li>
+                <li
+                  class="op-slot display-flex justify-content-center align-items-center">
+                  <i class="fa-regular fa-plus"></i>
+                </li>
+                <li
+                  class="op-slot display-flex justify-content-center align-items-center">
+                  <i class="fa-regular fa-plus"></i>
+                </li>
+              </ul>
+            </div>
+            <div class="entryNotes column-half">
+              <textarea
+                class="notes"
+                name="notes"
+                placeholder="Notes"></textarea>
+            </div>
+            <div class="form-buttons column-half">
+              <input type="button" class="clear" value="Clear" />
+              <input type="submit" class="submit" value="Submit" />
+            </div>
           </div>
-          <div class="entryNotes column-half">
-            <textarea class="notes" name="notes" placeholder="Notes"></textarea>
-          </div>
-          <div class="form-buttons column-half">
-            <input type="button" class="clear" value="Clear" />
-            <input type="submit" class="submit" value="Submit" />
-          </div>
-        </div>
+        </form>
         <div class="column-half ul-list">
           <div
             id="squad-class"

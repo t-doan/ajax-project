@@ -97,6 +97,10 @@ li {
   background-color: #3df708;
 }
 
+.selected:hover {
+  background-color: #2dd256;
+}
+
 .classes {
   width: 40px;
   height: 40px;
@@ -274,9 +278,20 @@ padding-zero {
 #squad-class {
   position: relative;
   left: 30rem;
-  bottom: 23rem;
+  bottom: 27rem;
 }
 
 .slotOp {
   width: 5rem;
+}
+
+.squadName {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.nameHeader {
+  width: auto;
 }

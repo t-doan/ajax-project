@@ -1,3 +1,5 @@
+/* global data */
+
 const $ulOperatorList = document.querySelector('.operators-list');
 const $modal = document.querySelector('#modal-section');
 const $class = document.querySelector('.classes-box');
@@ -15,6 +17,11 @@ const $squadClass = document.querySelector('#squad-class');
 const $liSlot = document.querySelectorAll('.op-slot');
 const $plusIcon = document.querySelectorAll('.fa-plus');
 
+const $form = document.querySelector('#form');
+const $ulEntryList = document.querySelector('.entryList');
+const $nameHeader = document.querySelector('.nameHeader');
+
+$form.addEventListener('submit', handleSubmit);
 $ulSquadList.addEventListener('click', handleSelection);
 $teamSlot.addEventListener('click', openOps);
 $ulOperatorList.addEventListener('click', handleOperator);
@@ -33,7 +40,8 @@ $squadsTab.addEventListener('click', function () {
 
 const xhr = new XMLHttpRequest();
 const operatorArray = [];
-const squadArray = [];
+let squadArray = [];
+
 xhr.open(
   'GET',
   'https://lfz-cors.herokuapp.com/?url=https://api.rhodesapi.com/api/operator?exclude=talents,rarity,artist,va,description,quote,voicelines,alter,affiliation,tags,range,statistics,trait,potential,trust,skills,costs,module,base,headhunting,recruitable,availability,release_dates',
@@ -77,13 +85,10 @@ function renderOne(ops) {
     if (ops === operator.name) {
       $slotImg.setAttribute('src', operator.art[1].link);
       $slotImg.setAttribute('alt', operator.name);
-      $slotImg.classList.add('slotOp');
+      $slotImg.setAttribute('name', 'photo');
+      $slotImg.classList.add('slotOp', 'photo');
     }
   }
-  // const $newImg = document.createElement('img');
-  // $newImg.classList.add('ops');
-  // // $newImg.setAttribute('src', );
-  // $newImg.setAttribute('alt', ops.name);
 
   return $slotImg;
 }
@@ -354,23 +359,73 @@ function checkEntry() {
 function handleSelection() {
   if (event.target.getAttribute('alt') !== null) {
     const selectOps = event.target.getAttribute('alt');
+
     if (squadArray.length < 12) {
       if (!squadArray.includes(selectOps)) {
         event.target.classList.add('selected');
+        $nameHeader.innerText = 'Added: ' + selectOps;
         squadArray.push(selectOps);
+      } else {
+        event.target.classList.remove('selected');
+        $nameHeader.innerText = 'Removed: ' + selectOps;
+        squadArray.pop(selectOps);
       }
 
-      console.log('cl', squadArray.length);
-    }
-
-    if (squadArray.length === 12) {
-      replaceSlot(squadArray);
+      if (squadArray.length === 12) {
+        replaceSlot(squadArray);
+      }
     }
   }
 }
 
 function replaceSlot(array) {
+  const $plusIcon = document.querySelectorAll('.fa-plus');
   for (let i = 0; i < $plusIcon.length; i++) {
     $plusIcon[i].replaceWith(renderOne(array[i]));
   }
+}
+
+function resetSlot(array) {
+  const $slotOp = document.querySelectorAll('.slotOp');
+  for (let i = 0; i < $slotOp.length; i++) {
+    $slotOp[i].replaceWith(createIcon());
+  }
+}
+
+function createIcon() {
+  const $icon = document.createElement('i');
+  $icon.classList.add('fa-regular', 'fa-plus');
+  return $icon;
+}
+
+function clearSelection() {
+  const $selected = document.querySelectorAll('.selected');
+  for (let i = 0; i < $selected.length; i++) {
+    $selected[i].classList.remove('selected');
+  }
+  squadArray = [];
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+
+  let squadEntry = {};
+  squadEntry = {
+    name: $form.elements.teamName.value,
+    members: squadArray,
+    notes: $form.elements.notes.value,
+    entryId: data.nextEntryId,
+  };
+  data.nextEntryId++;
+  data.entries.unshift(squadEntry);
+  // $ulEntryList.prepend(renderEntry(squadEntry));
+  clearSelection(squadArray);
+  resetSlot();
+  $nameHeader.innerText = 'Add your operators';
+  $form.reset();
+}
+
+function loadSquadEntry() {
+  const $dataSquadDiv = document.createElement('div');
+  $dataSquadDiv.setAttribute('data-entry-id', data.entryId);
 }
