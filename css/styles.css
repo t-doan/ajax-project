@@ -29,7 +29,6 @@
 
 .header-button {
   width: 18em;
-  height: 3em;
   font-size: 9px;
   color: #fff;
   background-color: #000;
@@ -41,11 +40,20 @@
 .tabs {
   margin: auto;
   font-weight: 400;
+  border-radius: 15px;
 }
 
 .tabs:hover {
-  color: yellow;
+  background-color: #ff6;
+  color: #000;
   cursor: pointer;
+}
+
+.currentTab {
+  background-color: #32accd;
+  color: #000;
+  cursor: pointer;
+  border-radius: 15px;
 }
 
 .justify-content-center {
@@ -60,7 +68,8 @@
   overflow-x: hidden;
 }
 
-.operators-list {
+.operators-list,
+.squads-list {
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -82,6 +91,14 @@ li {
 .ops:hover {
   background-color: #0baef4;
   cursor: pointer;
+}
+
+.selected {
+  background-color: #3df708;
+}
+
+.selected:hover {
+  background-color: #2dd256;
 }
 
 .classes {
@@ -122,7 +139,7 @@ li {
   position: relative;
 }
 
-#classes-box {
+.classes-box {
   padding: 1rem 0;
 }
 
@@ -185,8 +202,123 @@ padding-zero {
   background-color: #ff6;
 }
 
+.entry-form {
+  border: 0.5px solid #fff;
+  background-color: #434846;
+  color: #000;
+  font-size: 12px;
+}
+
+.name-text {
+  margin: 0.75rem 0.25rem 0;
+}
+
+.op-slot {
+  background-color: white;
+  width: 4rem;
+  height: 6rem;
+  border: 0.5px solid #000;
+  cursor: pointer;
+}
+
+.op-slot:hover {
+  background-color: #d9d9d9;
+}
+
+.fa-regular {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.fa-sharp {
+  font-size: 1.5rem;
+}
+
+.team-slot {
+  padding: 1rem;
+  text-align: center;
+}
+
+.form-buttons {
+  text-align: end;
+}
+
+.notes {
+  resize: none;
+  font-size: 12px;
+  width: 100%;
+  height: 4rem;
+  margin: 0 1rem 1rem 0;
+}
+
+.clear,
+.submit {
+  width: 6rem;
+  border-radius: 10%;
+  cursor: pointer;
+}
+
+.clear {
+  background-color: #de3621;
+  color: #fff;
+}
+
+.submit {
+  background-color: #21c9de;
+  color: #000;
+}
+
+.slotOp {
+  width: 5rem;
+}
+
+.squadName {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+  font-style: italic;
+  margin: auto;
+  padding: 1rem 0 0;
+}
+
+.nameHeader {
+  width: auto;
+}
+
+.teamEntry {
+  background-color: slategrey;
+  margin: 0 0 0.5rem;
+}
+
+.entryList {
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
 @media screen and (min-width: 768px) {
   #operator-img {
     width: 30rem;
+  }
+
+  .header-button {
+    width: 18em;
+    font-size: 9px;
+    color: #fff;
+    background-color: #000;
+    border-radius: 15px;
+    text-align: center;
+    margin: 0 2em;
+    flex-basis: calc(100% / 8);
+  }
+
+  .squads-list,
+  #squad-class {
+    position: relative;
+    left: 30rem;
+    bottom: 27rem;
   }
 }

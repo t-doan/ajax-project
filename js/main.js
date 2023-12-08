@@ -1,13 +1,65 @@
-const $ul = document.querySelector('ul');
-const $modal = document.querySelector('#modal-section');
-const $class = document.querySelector('#classes-box');
-const $classBox = document.querySelectorAll('.class-box');
-const $operatorsTab = document.querySelectorAll('.tabs');
+/* global data */
 
-$ul.addEventListener('click', handleOperator);
+const $ulOperatorList = document.querySelector('.operators-list');
+const $modal = document.querySelector('#modal-section');
+const $class = document.querySelector('.classes-box');
+const $classBox = document.querySelectorAll('.class-box');
+
+const $operatorsTab = document.querySelector('#operators-tab');
+const $squadsTab = document.querySelector('#squads-tab');
+const $entryTab = document.querySelector('#entry-tab');
+
+const $opsPage = document.querySelector('.opsPage');
+const $squadPage = document.querySelector('.squadPage');
+
+const $ulSquadList = document.querySelector('.squads-list');
+const $noEntry = document.querySelector('.noEntry');
+
+const $teamSlot = document.querySelector('.team-slot');
+const $squadClass = document.querySelector('#squad-class');
+const $liSlot = document.querySelectorAll('.op-slot');
+const $plusIcon = document.querySelectorAll('.fa-plus');
+
+const $form = document.querySelector('#form');
+const $ulEntryList = document.querySelector('.entryList');
+const $nameHeader = document.querySelector('.nameHeader');
+const $squadHeader = document.querySelector('.squadHeader');
+const $opSelector = document.querySelector('.opSelector');
+
+$form.addEventListener('submit', handleSubmit);
+$form.addEventListener('onsubmit', replaceSlot);
+$ulSquadList.addEventListener('click', handleSelection);
+$teamSlot.addEventListener('click', openOps);
+$ulOperatorList.addEventListener('click', handleOperator);
+$squadClass.addEventListener('click', handleFilter);
 $class.addEventListener('click', handleFilter);
 
+$operatorsTab.addEventListener('click', function () {
+  $operatorsTab.classList.add('currentTab');
+  $squadsTab.classList.remove('currentTab');
+  $entryTab.classList.remove('currentTab');
+  viewSwap('operators');
+});
+$squadsTab.addEventListener('click', function () {
+  $operatorsTab.classList.remove('currentTab');
+  $squadsTab.classList.add('currentTab');
+  $entryTab.classList.remove('currentTab');
+  viewSwap('squads');
+});
+$entryTab.addEventListener('click', function () {
+  $entryTab.classList.add('currentTab');
+  $operatorsTab.classList.remove('currentTab');
+  $squadsTab.classList.remove('currentTab');
+  viewSwap('new');
+});
+
+document.addEventListener('DOMContentLoaded', loadContent);
+
 const xhr = new XMLHttpRequest();
+const operatorArray = [];
+let squadArray = [];
+let imageArray = [];
+
 xhr.open(
   'GET',
   'https://lfz-cors.herokuapp.com/?url=https://api.rhodesapi.com/api/operator?exclude=talents,rarity,artist,va,description,quote,voicelines,alter,affiliation,tags,range,statistics,trait,potential,trust,skills,costs,module,base,headhunting,recruitable,availability,release_dates',
@@ -18,6 +70,7 @@ xhr.addEventListener('load', function () {
     if (ops.name !== 'Kirin X Yato') {
       if (ops.art.length > 1) {
         handleList(ops);
+        operatorArray.push(ops);
       }
     }
   }
@@ -25,7 +78,8 @@ xhr.addEventListener('load', function () {
 xhr.send();
 
 function handleList(ops) {
-  $ul.appendChild(renderList(ops));
+  $ulOperatorList.appendChild(renderList(ops));
+  $ulSquadList.appendChild(renderList(ops));
 }
 
 function renderList(ops) {
@@ -34,12 +88,27 @@ function renderList(ops) {
   const $newLi = document.createElement('li');
   $newLi.setAttribute('data-id', ops.name);
   $newLi.setAttribute('data-class', ops.class[0]);
+  $newLi.classList.add('operators');
   $newImg.classList.add('ops');
   $newImg.setAttribute('src', artLink);
   $newImg.setAttribute('alt', ops.name);
   $newLi.appendChild($newImg);
 
   return $newLi;
+}
+
+function renderOne(ops) {
+  const $slotImg = document.createElement('img');
+  for (const operator of operatorArray) {
+    if (ops === operator.name) {
+      $slotImg.setAttribute('src', operator.art[1].link);
+      $slotImg.setAttribute('alt', operator.name);
+      $slotImg.setAttribute('name', 'photo');
+      $slotImg.classList.add('slotOp', 'photo');
+    }
+  }
+
+  return $slotImg;
 }
 
 function handleOperator(event) {
@@ -193,56 +262,56 @@ function setClassImg(operator) {
 
 function handleFilter(event) {
   if (
-    event.target.getAttribute('id') === 'caster' ||
+    event.target.classList.contains('caster') ||
     event.target.getAttribute('alt') === 'caster' ||
     event.target.innerText === 'Caster'
   ) {
     filterOps('Caster');
     selected('caster');
   } else if (
-    event.target.getAttribute('id') === 'defender' ||
+    event.target.classList.contains('defender') ||
     event.target.getAttribute('alt') === 'defender' ||
     event.target.innerText === 'Defender'
   ) {
     filterOps('Defender');
     selected('defender');
   } else if (
-    event.target.getAttribute('id') === 'guard' ||
+    event.target.classList.contains('guard') ||
     event.target.getAttribute('alt') === 'guard' ||
     event.target.innerText === 'Guard'
   ) {
     filterOps('Guard');
     selected('guard');
   } else if (
-    event.target.getAttribute('id') === 'medic' ||
+    event.target.classList.contains('medic') ||
     event.target.getAttribute('alt') === 'medic' ||
     event.target.innerText === 'Medic'
   ) {
     filterOps('Medic');
     selected('medic');
   } else if (
-    event.target.getAttribute('id') === 'sniper' ||
+    event.target.classList.contains('sniper') ||
     event.target.getAttribute('alt') === 'sniper' ||
     event.target.innerText === 'Sniper'
   ) {
     filterOps('Sniper');
     selected('sniper');
   } else if (
-    event.target.getAttribute('id') === 'specialist' ||
+    event.target.classList.contains('specialist') ||
     event.target.getAttribute('alt') === 'specialist' ||
     event.target.innerText === 'Specialist'
   ) {
     filterOps('Specialist');
     selected('specialist');
   } else if (
-    event.target.getAttribute('id') === 'supporter' ||
+    event.target.classList.contains('supporter') ||
     event.target.getAttribute('alt') === 'supporter' ||
     event.target.innerText === 'Supporter'
   ) {
     filterOps('Supporter');
     selected('supporter');
   } else if (
-    event.target.getAttribute('id') === 'vanguard' ||
+    event.target.classList.contains('vanguard') ||
     event.target.getAttribute('alt') === 'vanguard' ||
     event.target.innerText === 'Vanguard'
   ) {
@@ -252,7 +321,7 @@ function handleFilter(event) {
 }
 
 function filterOps(classTag) {
-  const $li = document.querySelectorAll('li');
+  const $li = document.querySelectorAll('.operators');
   for (let i = 0; i < $li.length; i++) {
     if ($li[i].getAttribute('data-class') !== classTag) {
       $li[i].classList.add('hidden');
@@ -264,7 +333,7 @@ function filterOps(classTag) {
 
 function selected(classTag) {
   for (let i = 0; i < $classBox.length; i++) {
-    if ($classBox[i].id === classTag) {
+    if ($classBox[i].classList.contains(classTag)) {
       if ($classBox[i].classList.contains('click')) {
         $classBox[i].classList.remove('click');
         unFilterOps();
@@ -281,5 +350,177 @@ function unFilterOps() {
   const $li = document.querySelectorAll('li');
   for (let i = 0; i < $li.length; i++) {
     $li[i].classList.remove('hidden');
+  }
+}
+
+function viewSwap(view) {
+  if (view === 'operators') {
+    $opsPage.classList.remove('hidden');
+
+    $squadPage.classList.add('hidden');
+
+    data.view = view;
+  } else if (view === 'squads') {
+    $squadPage.classList.remove('hidden');
+    $ulEntryList.classList.remove('hidden');
+
+    $opsPage.classList.add('hidden');
+
+    $nameHeader.classList.add('hidden');
+    $form.classList.add('hidden');
+    $opSelector.classList.add('hidden');
+
+    data.view = view;
+  } else if (view === 'new') {
+    $nameHeader.classList.remove('hidden');
+    $form.classList.remove('hidden');
+    $opSelector.classList.remove('hidden');
+    $squadPage.classList.remove('hidden');
+
+    $opsPage.classList.add('hidden');
+
+    $squadHeader.classList.add('hidden');
+    $ulEntryList.classList.add('hidden');
+
+    data.view = view;
+  }
+}
+
+function openOps() {
+  if (event.target.matches('li') || event.target.matches('i')) {
+    $squadClass.classList.remove('hidden');
+    $ulSquadList.classList.remove('hidden');
+  }
+}
+
+function checkEntry() {
+  if (data.entries.length !== 0) {
+    $noEntry.classList.remove('hidden');
+  } else if (data.entries.length === 0) {
+    if (!$noEntry.classList.contains('hidden')) {
+      $noEntry.classList.add('hidden');
+    }
+  }
+}
+
+function handleSelection() {
+  if (event.target.getAttribute('alt') !== null) {
+    const selectOps = event.target.getAttribute('alt');
+    const imageOps = event.target.getAttribute('src');
+    if (squadArray.length < 12) {
+      if (!squadArray.includes(selectOps)) {
+        event.target.classList.add('selected');
+        $nameHeader.innerText = 'Added: ' + selectOps;
+        imageArray.push(imageOps);
+        squadArray.push(selectOps);
+      } else {
+        event.target.classList.remove('selected');
+        $nameHeader.innerText = 'Removed: ' + selectOps;
+        imageArray.pop(imageOps);
+        squadArray.pop(selectOps);
+      }
+
+      if (squadArray.length === 12) {
+        replaceSlot(squadArray);
+      }
+    }
+  }
+}
+
+function replaceSlot(array) {
+  const $plusIcon = document.querySelectorAll('.fa-plus');
+  for (let i = 0; i < $plusIcon.length; i++) {
+    $plusIcon[i].replaceWith(renderOne(array[i]));
+  }
+}
+
+function resetSlot(array) {
+  const $slotOp = document.querySelectorAll('.slotOp');
+  for (let i = 0; i < $slotOp.length; i++) {
+    $slotOp[i].replaceWith(createIcon());
+  }
+}
+
+function createIcon() {
+  const $icon = document.createElement('i');
+  $icon.classList.add('fa-regular', 'fa-plus');
+  return $icon;
+}
+
+function clearSelection() {
+  const $selected = document.querySelectorAll('.selected');
+  for (let i = 0; i < $selected.length; i++) {
+    $selected[i].classList.remove('selected');
+  }
+  squadArray = [];
+}
+
+function handleSubmit(event) {
+  event.preventDefault();
+  replaceSlot(imageArray);
+  let squadEntry = {};
+  squadEntry = {
+    name: $form.elements.teamName.value,
+    members: squadArray,
+    images: imageArray,
+    notes: $form.elements.notes.value,
+    entryId: data.nextEntryId,
+  };
+  data.nextEntryId++;
+  data.entries.unshift(squadEntry);
+  $ulEntryList.prepend(renderEntry(squadEntry));
+  clearSelection(squadArray);
+  resetSlot();
+  $nameHeader.innerText = 'Add your operators';
+  $form.reset();
+}
+
+function renderEntry(entry) {
+  const $dataSquadDiv = document.createElement('div');
+  $dataSquadDiv.setAttribute('data-entry-id', entry.entryId);
+  $dataSquadDiv.classList.add('squad', 'row', 'column-half', 'teamEntry');
+  const $squadName = document.createElement('h1');
+  $squadName.classList.add('squadName');
+  $squadName.innerText = entry.name;
+
+  const $teamSlot = document.createElement('ul');
+  $teamSlot.classList.add(
+    'team-slot',
+    'display-flex',
+    'align-items-center',
+    'flex-wrap',
+    'justify-content-even',
+  );
+
+  $dataSquadDiv.appendChild($squadName);
+  $dataSquadDiv.appendChild($teamSlot);
+
+  for (let i = 0; i < entry.members.length; i++) {
+    const $liSlot = document.createElement('li');
+    $liSlot.classList.add(
+      'op-slot',
+      'display-flex',
+      'justify-content-center',
+      'align-items-center',
+    );
+    const $img = document.createElement('img');
+    $img.classList.add('slotOp', 'photo');
+    $img.setAttribute('src', entry.images[i]);
+    $teamSlot.appendChild($liSlot);
+    $liSlot.appendChild($img);
+  }
+
+  const $notes = document.createElement('p');
+  $notes.classList.add('notes');
+  $notes.innerText = entry.notes;
+  $dataSquadDiv.appendChild($notes);
+
+  return $dataSquadDiv;
+}
+
+function loadContent() {
+  viewSwap(data.view);
+  for (let i = 0; i < data.entries.length; i++) {
+    $ulEntryList.appendChild(renderEntry(data.entries[i]));
   }
 }
