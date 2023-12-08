@@ -373,7 +373,7 @@ function viewSwap(view) {
 
     data.view = view;
   } else if (view === 'new') {
-    checkEntry();
+    $noEntry.classList.add('hidden');
     $nameHeader.classList.remove('hidden');
     $form.classList.remove('hidden');
     $opSelector.classList.remove('hidden');
