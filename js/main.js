@@ -361,6 +361,7 @@ function viewSwap(view) {
 
     data.view = view;
   } else if (view === 'squads') {
+    checkEntry();
     $squadPage.classList.remove('hidden');
     $ulEntryList.classList.remove('hidden');
 
@@ -372,6 +373,7 @@ function viewSwap(view) {
 
     data.view = view;
   } else if (view === 'new') {
+    checkEntry();
     $nameHeader.classList.remove('hidden');
     $form.classList.remove('hidden');
     $opSelector.classList.remove('hidden');
@@ -390,16 +392,6 @@ function openOps() {
   if (event.target.matches('li') || event.target.matches('i')) {
     $squadClass.classList.remove('hidden');
     $ulSquadList.classList.remove('hidden');
-  }
-}
-
-function checkEntry() {
-  if (data.entries.length !== 0) {
-    $noEntry.classList.remove('hidden');
-  } else if (data.entries.length === 0) {
-    if (!$noEntry.classList.contains('hidden')) {
-      $noEntry.classList.add('hidden');
-    }
   }
 }
 
@@ -473,6 +465,7 @@ function handleSubmit(event) {
   resetSlot();
   $nameHeader.innerText = 'Add your operators';
   $form.reset();
+  checkEntry();
 }
 
 function renderEntry(entry) {
@@ -519,8 +512,17 @@ function renderEntry(entry) {
 }
 
 function loadContent() {
+  checkEntry();
   viewSwap(data.view);
   for (let i = 0; i < data.entries.length; i++) {
     $ulEntryList.appendChild(renderEntry(data.entries[i]));
+  }
+}
+
+function checkEntry() {
+  if (data.entries.length === 0) {
+    $noEntry.classList.remove('hidden');
+  } else {
+    $noEntry.classList.add('hidden');
   }
 }
