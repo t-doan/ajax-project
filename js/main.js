@@ -27,6 +27,7 @@ const $squadHeader = document.querySelector('.squadHeader');
 const $opSelector = document.querySelector('.opSelector');
 
 $form.addEventListener('submit', handleSubmit);
+$form.addEventListener('onsubmit', replaceSlot);
 $ulSquadList.addEventListener('click', handleSelection);
 $teamSlot.addEventListener('click', openOps);
 $ulOperatorList.addEventListener('click', handleOperator);
@@ -456,7 +457,7 @@ function clearSelection() {
 
 function handleSubmit(event) {
   event.preventDefault();
-
+  replaceSlot(imageArray);
   let squadEntry = {};
   squadEntry = {
     name: $form.elements.teamName.value,
@@ -468,7 +469,6 @@ function handleSubmit(event) {
   data.nextEntryId++;
   data.entries.unshift(squadEntry);
   $ulEntryList.prepend(renderEntry(squadEntry));
-  loadContent(squadEntry);
   clearSelection(squadArray);
   resetSlot();
   $nameHeader.innerText = 'Add your operators';
@@ -476,8 +476,6 @@ function handleSubmit(event) {
 }
 
 function renderEntry(entry) {
-  console.log(data.entries);
-
   const $dataSquadDiv = document.createElement('div');
   $dataSquadDiv.setAttribute('data-entry-id', entry.entryId);
   $dataSquadDiv.classList.add('squad', 'row', 'column-half', 'teamEntry');
@@ -523,7 +521,6 @@ function renderEntry(entry) {
 function loadContent() {
   viewSwap(data.view);
   for (let i = 0; i < data.entries.length; i++) {
-    console.log('c', data.entries[i]);
     $ulEntryList.appendChild(renderEntry(data.entries[i]));
   }
 }

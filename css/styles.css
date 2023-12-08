@@ -294,6 +294,11 @@ padding-zero {
   padding: 0;
 }
 
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
 @media screen and (min-width: 768px) {
   #operator-img {
     width: 30rem;
