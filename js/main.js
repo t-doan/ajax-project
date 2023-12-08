@@ -4,8 +4,11 @@ const $ulOperatorList = document.querySelector('.operators-list');
 const $modal = document.querySelector('#modal-section');
 const $class = document.querySelector('.classes-box');
 const $classBox = document.querySelectorAll('.class-box');
+
 const $operatorsTab = document.querySelector('#operators-tab');
 const $squadsTab = document.querySelector('#squads-tab');
+const $entryTab = document.querySelector('#entry-tab');
+
 const $opsPage = document.querySelector('.opsPage');
 const $squadPage = document.querySelector('.squadPage');
 
@@ -20,6 +23,8 @@ const $plusIcon = document.querySelectorAll('.fa-plus');
 const $form = document.querySelector('#form');
 const $ulEntryList = document.querySelector('.entryList');
 const $nameHeader = document.querySelector('.nameHeader');
+const $squadHeader = document.querySelector('.squadHeader');
+const $opSelector = document.querySelector('.opSelector');
 
 $form.addEventListener('submit', handleSubmit);
 $ulSquadList.addEventListener('click', handleSelection);
@@ -27,20 +32,32 @@ $teamSlot.addEventListener('click', openOps);
 $ulOperatorList.addEventListener('click', handleOperator);
 $squadClass.addEventListener('click', handleFilter);
 $class.addEventListener('click', handleFilter);
+
 $operatorsTab.addEventListener('click', function () {
   $operatorsTab.classList.add('currentTab');
   $squadsTab.classList.remove('currentTab');
+  $entryTab.classList.remove('currentTab');
   viewSwap('operators');
 });
 $squadsTab.addEventListener('click', function () {
   $operatorsTab.classList.remove('currentTab');
   $squadsTab.classList.add('currentTab');
+  $entryTab.classList.remove('currentTab');
   viewSwap('squads');
 });
+$entryTab.addEventListener('click', function () {
+  $entryTab.classList.add('currentTab');
+  $operatorsTab.classList.remove('currentTab');
+  $squadsTab.classList.remove('currentTab');
+  viewSwap('new');
+});
+
+document.addEventListener('DOMContentLoaded', loadContent);
 
 const xhr = new XMLHttpRequest();
 const operatorArray = [];
 let squadArray = [];
+let imageArray = [];
 
 xhr.open(
   'GET',
@@ -338,10 +355,33 @@ function unFilterOps() {
 function viewSwap(view) {
   if (view === 'operators') {
     $opsPage.classList.remove('hidden');
+
     $squadPage.classList.add('hidden');
+
+    data.view = view;
   } else if (view === 'squads') {
     $squadPage.classList.remove('hidden');
+    $ulEntryList.classList.remove('hidden');
+
     $opsPage.classList.add('hidden');
+
+    $nameHeader.classList.add('hidden');
+    $form.classList.add('hidden');
+    $opSelector.classList.add('hidden');
+
+    data.view = view;
+  } else if (view === 'new') {
+    $nameHeader.classList.remove('hidden');
+    $form.classList.remove('hidden');
+    $opSelector.classList.remove('hidden');
+    $squadPage.classList.remove('hidden');
+
+    $opsPage.classList.add('hidden');
+
+    $squadHeader.classList.add('hidden');
+    $ulEntryList.classList.add('hidden');
+
+    data.view = view;
   }
 }
 
@@ -353,21 +393,29 @@ function openOps() {
 }
 
 function checkEntry() {
-  $noEntry.classList.remove('hidden');
+  if (data.entries.length !== 0) {
+    $noEntry.classList.remove('hidden');
+  } else if (data.entries.length === 0) {
+    if (!$noEntry.classList.contains('hidden')) {
+      $noEntry.classList.add('hidden');
+    }
+  }
 }
 
 function handleSelection() {
   if (event.target.getAttribute('alt') !== null) {
     const selectOps = event.target.getAttribute('alt');
-
+    const imageOps = event.target.getAttribute('src');
     if (squadArray.length < 12) {
       if (!squadArray.includes(selectOps)) {
         event.target.classList.add('selected');
         $nameHeader.innerText = 'Added: ' + selectOps;
+        imageArray.push(imageOps);
         squadArray.push(selectOps);
       } else {
         event.target.classList.remove('selected');
         $nameHeader.innerText = 'Removed: ' + selectOps;
+        imageArray.pop(imageOps);
         squadArray.pop(selectOps);
       }
 
@@ -413,19 +461,69 @@ function handleSubmit(event) {
   squadEntry = {
     name: $form.elements.teamName.value,
     members: squadArray,
+    images: imageArray,
     notes: $form.elements.notes.value,
     entryId: data.nextEntryId,
   };
   data.nextEntryId++;
   data.entries.unshift(squadEntry);
-  // $ulEntryList.prepend(renderEntry(squadEntry));
+  $ulEntryList.prepend(renderEntry(squadEntry));
+  loadContent(squadEntry);
   clearSelection(squadArray);
   resetSlot();
   $nameHeader.innerText = 'Add your operators';
   $form.reset();
 }
 
-function loadSquadEntry() {
+function renderEntry(entry) {
+  console.log(data.entries);
+
   const $dataSquadDiv = document.createElement('div');
-  $dataSquadDiv.setAttribute('data-entry-id', data.entryId);
+  $dataSquadDiv.setAttribute('data-entry-id', entry.entryId);
+  $dataSquadDiv.classList.add('squad', 'row', 'column-half', 'teamEntry');
+  const $squadName = document.createElement('h1');
+  $squadName.classList.add('squadName');
+  $squadName.innerText = entry.name;
+
+  const $teamSlot = document.createElement('ul');
+  $teamSlot.classList.add(
+    'team-slot',
+    'display-flex',
+    'align-items-center',
+    'flex-wrap',
+    'justify-content-even',
+  );
+
+  $dataSquadDiv.appendChild($squadName);
+  $dataSquadDiv.appendChild($teamSlot);
+
+  for (let i = 0; i < entry.members.length; i++) {
+    const $liSlot = document.createElement('li');
+    $liSlot.classList.add(
+      'op-slot',
+      'display-flex',
+      'justify-content-center',
+      'align-items-center',
+    );
+    const $img = document.createElement('img');
+    $img.classList.add('slotOp', 'photo');
+    $img.setAttribute('src', entry.images[i]);
+    $teamSlot.appendChild($liSlot);
+    $liSlot.appendChild($img);
+  }
+
+  const $notes = document.createElement('p');
+  $notes.classList.add('notes');
+  $notes.innerText = entry.notes;
+  $dataSquadDiv.appendChild($notes);
+
+  return $dataSquadDiv;
+}
+
+function loadContent() {
+  viewSwap(data.view);
+  for (let i = 0; i < data.entries.length; i++) {
+    console.log('c', data.entries[i]);
+    $ulEntryList.appendChild(renderEntry(data.entries[i]));
+  }
 }

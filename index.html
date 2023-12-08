@@ -29,15 +29,18 @@
           <img id="arknights-logo" src="./images/logo.png" alt="logo" />
         </div>
         <div class="column-fourth header-button">
-          <h1 class="tabs" id="operators-tab">Operators</h1>
+          <h1 class="tabs currentTab" id="operators-tab">Operators</h1>
         </div>
         <div class="column-fourth header-button">
           <h1 class="tabs" id="squads-tab">Squads</h1>
         </div>
+        <div class="column-fourth header-button">
+          <h1 class="tabs" id="entry-tab">New</h1>
+        </div>
       </div>
     </header>
     <main class="container">
-      <div class="opsPage hidden">
+      <div class="opsPage">
         <div>
           <h1>All Operators</h1>
         </div>
@@ -102,14 +105,14 @@
           <div id="modal-section" class="column-half padding-zero"></div>
         </div>
       </div>
-      <div class="squadPage display-flex flex-wrap">
+      <div class="squadPage display-flex flex-wrap hidden">
         <h1 class="noEntry column-half hidden">No squads have been made!</h1>
-        <h1 class="nameHeader column-half">Add your operators</h1>
-        <ul class="entryList"></ul>
-        <form id="form">
+        <h1 class="squadHeader column-half hidden">Squad List</h1>
+        <ul class="entryList hidden"></ul>
+        <h1 class="nameHeader column-half hidden">Add your operators</h1>
+        <form id="form" class="hidden">
           <div class="row entry-form column-half">
-            <div class="squad" data-entry-id="1">
-              <h1 class="squadName">Squad Name</h1>
+            <div class="squad">
               <input
                 class="name-text"
                 name="teamName"
@@ -179,7 +182,7 @@
             </div>
           </div>
         </form>
-        <div class="column-half ul-list">
+        <div class="opSelector column-half ul-list">
           <div
             id="squad-class"
             class="classes-box row align-items-center justify-content-even hidden">

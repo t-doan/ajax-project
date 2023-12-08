@@ -209,12 +209,6 @@ padding-zero {
   font-size: 12px;
 }
 
-@media screen and (min-width: 768px) {
-  #operator-img {
-    width: 30rem;
-  }
-}
-
 .name-text {
   margin: 0.75rem 0.25rem 0;
 }
@@ -274,13 +268,6 @@ padding-zero {
   color: #000;
 }
 
-.squads-list,
-#squad-class {
-  position: relative;
-  left: 30rem;
-  bottom: 27rem;
-}
-
 .slotOp {
   width: 5rem;
 }
@@ -290,8 +277,43 @@ padding-zero {
   font-size: 18px;
   font-weight: 400;
   font-style: italic;
+  margin: auto;
+  padding: 1rem 0 0;
 }
 
 .nameHeader {
   width: auto;
+}
+
+.teamEntry {
+  background-color: slategrey;
+  margin: 0 0 0.5rem;
+}
+
+.entryList {
+  padding: 0;
+}
+
+@media screen and (min-width: 768px) {
+  #operator-img {
+    width: 30rem;
+  }
+
+  .header-button {
+    width: 18em;
+    font-size: 9px;
+    color: #fff;
+    background-color: #000;
+    border-radius: 15px;
+    text-align: center;
+    margin: 0 2em;
+    flex-basis: calc(100% / 8);
+  }
+
+  .squads-list,
+  #squad-class {
+    position: relative;
+    left: 30rem;
+    bottom: 27rem;
+  }
 }

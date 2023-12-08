@@ -1,7 +1,7 @@
 /* exported data */
 
 let data = {
-  view: 'squads',
+  view: 'operators',
   entries: [],
   editing: null,
   nextEntryId: 1,
